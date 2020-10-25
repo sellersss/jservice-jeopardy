@@ -9,12 +9,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Jeopardy</title>
     <link
-      href="https://fonts.googleapis.com/css?family=Copse&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400&family=Work+Sans:wght@900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/js/style.js" />
+    <link rel="stylesheet" href="src/css/style.css" />
   </head>
   <body>
+    <div class="container">
+      <div class="btn-container">
+        <button class="btn" id="restart">
+          Restart Game
+          <span>
+            <b></b>
+            <b></b>
+            <b></b>
+          </span>
+        </button>
+      </div>
+      <table id="jeopardy">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <script src="https://unpkg.com/jquery"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://unpkg.com/lodash"></script>
