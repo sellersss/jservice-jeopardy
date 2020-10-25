@@ -5,3 +5,136 @@
   #8d2ab5
   #74119c
 */
+
+body {
+  background-color: #303030;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  margin: auto;
+  width: 90vw;
+}
+
+#jeopardy {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+thead {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  color: #f5f5f5;
+  background-color: #010b78;
+  height: 9em;
+}
+
+tbody {
+  background-color: #010b78;
+  color: #dba425;
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+th,
+td {
+  border: solid 1px #060ce9;
+}
+
+th {
+  padding: 20px;
+}
+
+td {
+  height: 9em;
+  width: 19em;
+  font-size: 0.8em;
+  padding: 15px;
+  box-shadow: inset 0 0 50px #00053b;
+  transition: ease-out 0.3s;
+}
+
+td:hover {
+  box-shadow: inset 0 0 30px #00053b;
+  background-color: #060ce9;
+  transition: 0.6s;
+}
+
+.active {
+  box-shadow: inset 0 0 30px #00053b;
+  background-color: #060ce9;
+}
+
+@keyframes stretch {
+  0% {
+    transform: scale(0.5);
+    background-color: #b5ddf0;
+  }
+  50% {
+    background-color: #cfe9f6;
+  }
+  100% {
+    transform: scale(1);
+    background-color: #ffffff;
+  }
+}
+
+.btn {
+  align-items: center;
+  background: #060ce9;
+  box-shadow: inset 0 0 50px #00053b;
+  border: solid 1px #060ce9;
+  border-radius: 5px;
+  color: #f5f5f5;
+  cursor: pointer;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+  min-width: 90px;
+  margin-bottom: 10px;
+}
+
+.btn.btn--loading {
+  font-size: 0;
+}
+
+.btn.btn--loading span {
+  display: flex;
+}
+
+.btn.btn--loading span b {
+  animation-direction: alternate;
+  animation-duration: 0.5s;
+  animation-fill-mode: none;
+  animation-iteration-count: infinite;
+  animation-name: stretch;
+  animation-play-state: running;
+  animation-timing-function: ease-out;
+  border-radius: 100%;
+  display: block;
+  height: 10px;
+  margin: 0 1px;
+  width: 10px;
+  animation-delay: 0.1s;
+  margin: 0 5px;
+}
+
+.btn.btn--loading span b:first-child {
+  animation-delay: 0s;
+  margin: 0;
+}
+
+.btn.btn--loading span b:last-child {
+  animation-delay: 0.2s;
+  margin: 0;
+}
+
+.btn b {
+  font-weight: normal;
+}
+
+.btn span {
+  display: none;
+}
