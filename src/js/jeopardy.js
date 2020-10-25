@@ -67,6 +67,7 @@ async function getCategory(catId) {
     console.error(e);
   }
 }
+
 /** Fill the HTML table#jeopardy with the categories & cells for questions.
  *
  * - The <thead> should be filled w/a <tr>, and a <td> for each category
@@ -75,7 +76,23 @@ async function getCategory(catId) {
  *   (initally, just show a "?" where the question/answer would go.)
  */
 
-async function fillTable() {}
+async function fillTable() {
+  $('#jeopardy thead').empty();
+  let $row = $('<tr>');
+  for (let catIndex = 0; catIndex < 6; catIndex++) {
+    $row.append($('<th>').text(categories[catIndex].title));
+  }
+  $('#jeopardy thead').append($row);
+
+  $('#jeopardy tbody').empty();
+  for (let clueIndex = 0; clueIndex < 5; clueIndex++) {
+    let $row = $('<tr>');
+    for (let catIndex = 0; catIndex < 6; catIndex++) {
+      $row.append($('<td>').attr('id', `${catIndex}-${clueIndex}`).text('?'));
+    }
+    $('#jeopardy tbody').append($row);
+  }
+}
 
 /** Handle clicking on a clue: show the question or answer.
  *
@@ -85,17 +102,34 @@ async function fillTable() {}
  * - if currently "answer", ignore click
  * */
 
-function handleClick(evt) {}
+function handleClick(e) {
+  let id = e.target.id;
+  let [catId, clueId] = id.split('-');
+  let clue = categories[catId].clue[clueId];
 
-/** Wipe the current Jeopardy board, show the loading spinner,
- * and update the button used to fetch data.
- */
+  if (!clue.showing) {
+    msg = clue.question;
+    clue.showing = 'question';
+  } else if (clue.showing === 'question') {
+    msg = clue.answer;
+    clue.showing = 'answer';
+  } else {
+    return;
+  }
 
-function showLoadingView() {}
+  $(`#${catId}-${clueId}`).html(msg);
+}
 
-/** Remove the loading spinner and update the button used to fetch data. */
+/** Loading button */
 
-function hideLoadingView() {}
+function showLoadingView() {
+  $('.btn').on('click', function () {
+    $(this).addClass('btn--loading');
+    setTimeout(() => {
+      $(this).removeClass('btn--loading');
+    }, 2000);
+  });
+}
 
 /** Start game:
  *
@@ -104,12 +138,35 @@ function hideLoadingView() {}
  * - create HTML table
  * */
 
-async function setupAndStart() {}
+async function setupAndStart() {
+  let catIds = await getCategoryIds();
+  categories = [];
+
+  for (let catId of catIds) {
+    categories.push(await getCategory(catId));
+  }
+
+  fillTable();
+}
 
 /** On click of start / restart button, set up game. */
 
-// TODO
+$('#restart').click(function () {
+  showLoadingView();
+  $('table #jeopardy').empty();
+  setTimeout(function () {
+    setupAndStart();
+  }, 1500);
+});
 
 /** On page load, add event handler for clicking clues */
 
-// TODO
+$(async function () {
+  setupAndStart();
+  $('#jeopardy').on('click', 'td', handleClick);
+});
+
+// restart menu
+$('<td>').click(function () {
+  $(this).toggleClass('.active');
+});
