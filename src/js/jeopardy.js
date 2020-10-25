@@ -19,6 +19,7 @@
 //  ]
 
 let categories = [];
+const API_URL = 'https://jservice.io/api/';
 
 /** Get NUM_CATEGORIES random category from API.
  *
@@ -26,7 +27,16 @@ let categories = [];
  */
 
 async function getCategoryIds() {
-  let res = await axios.get(`https://jservice.io/api/categories?count=100`);
+  try {
+    // { "id": 1111, "title": "mixed bag", "clues_count": 5}
+    let res = await axios.get(`${API_URL}categories?count=100`);
+    let catIds = _.shuffle(res.data.map((cat) => cat.id));
+
+    // lodash ._sampleSize() method returns a random specified num of elements in an array
+    return _.sampleSize(catIds, 6);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 /** Return object with data about a category:
@@ -41,8 +51,22 @@ async function getCategoryIds() {
  *   ]
  */
 
-function getCategory(catId) {}
+async function getCategory(catId) {
+  try {
+    let res = await axios.get(`${API_URL}category?id=${catId}`);
+    let clues = res.data.clues;
+    let sampleClues = _.sampleSize(clues, 5);
+    let clue = sampleClues.map((cat) => ({
+      question: cat.question,
+      answer: cat.answer,
+      showing: null,
+    }));
 
+    return { title: res.data.title, clue };
+  } catch (e) {
+    console.error(e);
+  }
+}
 /** Fill the HTML table#jeopardy with the categories & cells for questions.
  *
  * - The <thead> should be filled w/a <tr>, and a <td> for each category
