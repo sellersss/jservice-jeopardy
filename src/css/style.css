@@ -105,7 +105,7 @@ td:hover {
 }
 
 .btn.btn--loading span b {
-  animation-direction: alternate;
+  animation-direction: alternate-reverse;
   animation-duration: 0.5s;
   animation-fill-mode: none;
   animation-iteration-count: infinite;
