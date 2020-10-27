@@ -75,6 +75,7 @@ td:hover {
   0% {
     transform: scale(0.3);
     background-color: #202020;
+    transition-duration: linear 0.3s;
   }
   50% {
     background-color: #475c66;
