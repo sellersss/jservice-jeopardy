@@ -23,6 +23,10 @@ body {
   border-collapse: collapse;
 }
 
+#jeopardy .hide {
+  display: none;
+}
+
 thead {
   font-family: 'Work Sans', sans-serif;
   font-size: 0.9em;
@@ -69,11 +73,11 @@ td:hover {
 
 @keyframes stretch {
   0% {
-    transform: scale(0.5);
-    background-color: #b5ddf0;
+    transform: scale(0.3);
+    background-color: #202020;
   }
   50% {
-    background-color: #cfe9f6;
+    background-color: #475c66;
   }
   100% {
     transform: scale(1);
@@ -94,6 +98,7 @@ td:hover {
   justify-content: center;
   min-width: 90px;
   margin-bottom: 10px;
+  font-family: 'Work Sans', sans-serif;
 }
 
 .btn.btn--loading {
@@ -124,11 +129,13 @@ td:hover {
 .btn.btn--loading span b:first-child {
   animation-delay: 0s;
   margin: 0;
+  display: block;
 }
 
 .btn.btn--loading span b:last-child {
   animation-delay: 0.2s;
   margin: 0;
+  display: block;
 }
 
 .btn b {
