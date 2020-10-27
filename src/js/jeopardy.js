@@ -122,14 +122,14 @@ function handleClick(e) {
 
 /** Loading button */
 
-function showLoadingView() {
-  $('.btn').on('click', function () {
-    $(this).addClass('btn--loading');
-    setTimeout(() => {
-      $(this).removeClass('btn--loading');
-    }, 2000);
-  });
-}
+// function showLoadingView() {
+//   $('#restart').click(function () {
+//     $(this).addClass('btn--loading');
+//     setTimeout(() => {
+//       $(this).removeClass('btn--loading');
+//     }, 2000);
+//   });
+// }
 
 /** Start game:
  *
@@ -152,8 +152,11 @@ async function setupAndStart() {
 /** On click of start / restart button, set up game. */
 
 $('#restart').click(function () {
-  showLoadingView();
-  $('table #jeopardy').empty();
+  $(this).addClass('btn--loading');
+  setTimeout(() => {
+    $(this).removeClass('btn--loading');
+  }, 2000);
+  $('table #jeopardy').hide();
   setTimeout(function () {
     setupAndStart();
   }, 1500);
@@ -167,6 +170,3 @@ $(async function () {
 });
 
 // restart menu
-$('<td>').click(function () {
-  $(this).toggleClass('.active');
-});
