@@ -120,7 +120,9 @@ function handleClick(e) {
   $(`#${catId}-${clueId}`).html(msg);
 }
 
-/** Loading button */
+/** Loading button
+ * ! moved to separate function
+ */
 
 // function showLoadingView() {
 //   $('#restart').click(function () {
